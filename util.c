@@ -69,6 +69,103 @@ int get_piece(int square, struct Board board)
     
 }
 
+// TODO: test this code
+// changes board to promote pawn on end of board to desired piece
+int promote(int file, int piece, int side, struct Board *board)
+{
+
+    U64 bb_square = 1ULL;
+    int rank;
+ 
+    // checking if file is in valid range
+    if (file > 7 || file < 0)
+    {
+        return -1;
+    }
+
+    // setting rank to check based on color
+    if (side == WHITE)
+    {
+        rank = 7;
+    }
+    else
+    {
+        rank = 0;
+    }
+
+    bb_square <<= rank * 8 + file;
+
+    // checking if there is a pawn of correct color on tile
+    if (side == WHITE && (bb_square & board->w_pawn) == 0)
+    {
+        return -1;
+    }
+    else if (side == BLACK && ((bb_square & board->b_pawn) == 0))
+    {
+        return -1;
+    }
+
+    // removing pawn from board
+    remove_piece(rank * 8 + file, board);
+
+    // adding desired piece
+    if (side == WHITE)
+    {
+        if (piece == KNIGHT)
+        {
+            board->w_knight |= bb_square;
+        }
+        else if (piece == BISHOP)
+        {
+            board->w_bishop |= bb_square;
+        }
+        else if (piece == ROOK)
+        {
+            board->w_rook |= bb_square;
+        }
+        else if (piece == QUEEN)
+        {
+            board->w_queen |= bb_square;
+        }
+        else 
+        {
+            return -1;
+        }
+
+        board->w_pieces |= bb_square;
+    }
+    else
+    {
+        if (piece == KNIGHT)
+        {
+            board->b_knight |= bb_square;
+        }
+        else if (piece == BISHOP)
+        {
+            board->b_bishop |= bb_square;
+        }
+        else if (piece == ROOK)
+        {
+            board->b_rook |= bb_square;
+        }
+        else if (piece == QUEEN)
+        {
+            board->b_queen |= bb_square;
+        }
+        else 
+        {
+            return -1;
+        }
+
+        board->b_pieces |= bb_square;
+    }
+
+    board->pieces = board->b_pieces | board->w_pieces;
+    return 0;
+
+}
+
+// TODO: change to int for error handling
 // remove piece from board from any given square
 void remove_piece(int square, struct Board *board)
 {

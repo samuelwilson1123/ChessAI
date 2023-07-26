@@ -112,6 +112,7 @@ struct Board
 int count_bits(U64 bb);
 int get_piece(int square, struct Board board);
 void string_to_squares(char input[], int * start_square, int * end_square);
+int promote(int file, int piece, int side, struct Board *board);
 void remove_piece(int square, struct Board *board);
 
 #endif
