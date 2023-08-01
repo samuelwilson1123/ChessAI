@@ -1,7 +1,8 @@
 
-# Chess AI
+# Sam Chess
 
-The goal of this project is to create an AI that plays you in chess using methods such as Alpha-beta pruning and bitboards.
+The goal of this project is to create an AI that plays you in chess using methods such as Alpha-beta pruning and bitboards. Currently
+the program works as a two player chess game with pseudo legal moves.
 
 NOTE: This project is still in early development, see Roadmap for current stage of progress
 
