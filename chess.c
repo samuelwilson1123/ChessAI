@@ -112,10 +112,11 @@ void print_board_full(struct Board *board)
 }
 
 // TODO: compress w turn and b turn into seperate method, add end game checks
+// TODO: implement promotion for both sides
+// CLEAN THIS UP
 // main game loop
 void loop(struct Board * board)
 {
-
     int turn = 1;
 
     printf("Chess!\nEnter q to quit\n");
@@ -128,7 +129,7 @@ void loop(struct Board * board)
 
         printf("Turn %d:\n", turn);
 
-        while (w_move < 0)
+        while (w_move < 0) // WHITE TURN
         {
 
             char input[10];
@@ -164,7 +165,7 @@ void loop(struct Board * board)
 
         }
 
-        while (b_move < 0)
+        while (b_move < 0) // BLACK TURN
         {
             
             char input[10];
